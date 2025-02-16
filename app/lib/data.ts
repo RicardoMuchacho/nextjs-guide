@@ -142,16 +142,16 @@ export async function fetchInvoicesPages(query: string) {
 
 export async function fetchInvoiceById(id: string) {
   try {
-    const data = await sql<InvoiceForm>`
+    const data = await sql<any>`
       SELECT
         invoices.id,
         invoices.customer_id,
         invoices.amount,
         invoices.status
-      FROM invoices
-      WHERE invoices.id = ${id};
-    `;
+      FROM invoices;
 
+    `;
+//      WHERE invoices.id = ${id};
     const invoice = data.rows.map((invoice) => ({
       ...invoice,
       // Convert amount from cents to dollars
